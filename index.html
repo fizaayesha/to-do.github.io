@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        *{
+    outline: none;
+    border: none;
+    font-size: 20px;
+}
+
+body{
+    height: 150vh;
+    background: linear-gradient(
+        rgb(20, 15, 20),
+        rgb(94, 18, 94),
+        rgb(156, 19, 145),
+        rgb(238, 100, 226),
+        rgb(253, 251, 252)
+    );
+}
+.container{
+    border: 4px solid deeppink;
+    width: 40%;
+    min-width: 450px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    padding: 30px 30px;
+    border-radius: 5px;
+
+}
+#newtask{
+    border-radius: 5px;
+    position: relative;
+    background-color: white;
+    padding: 20px 20px;
+    box-shadow: inset 1px 1px 10px deeppink,
+     inset -1px -1px 10px deeppink,
+      0px 5px 8px rgb(88, 5, 74),
+      -0px -5px 8px rgb(88, 5, 74);
+}
+#newtask input{
+    width: 70%;
+    height: 45px;
+    font-family: 'poppins', sans-serif;
+    background-color: pink;
+    color: purple;
+    position: relative;
+    border-radius: 5px;
+}
+#newtask button{
+    position: relative;
+    float: right;
+    width: 20%;
+    height: 45px;
+    background-color: purple;
+    color: white;
+    cursor: pointer;
+    text-transform: uppercase;
+    border-radius: 5px;
+    border: 1px solid deeppink;
+}
+#newtask button:hover{
+    background-color: deeppink;
+    border: 1px solid purple;
+}
+#tasks{
+    background-color: pink;
+    padding: 20px 20px;
+    margin-top: 50px;
+    box-shadow: inset 1px 1px 10px deeppink,
+    inset -1px -1px 10px deeppink,
+     0px 5px 8px rgb(88, 5, 74),
+     -0px -5px 8px rgb(88, 5, 74);
+     position: relative;
+     width: 92%;
+     border-radius: 5px;
+}
+.task{
+    border-bottom: 2px solid rgb(194, 61, 152);
+    background-color: pink;
+    height: 50px;
+    padding: 5px 10px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px;
+    color: purple;
+    font-size: 20px;
+    font-family: 'poppins', sans-serif;
+}
+.task span{
+    font-family: 'poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    border-radius: 5px;
+    color: purple;
+    font-size: 20px;
+    font-family: 'poppins', sans-serif;
+
+}
+.task button{
+    background-color: purple;
+    color: white;
+    height: 100%;
+    width: 40px;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid deeppink;
+}
+.task button:hover{
+    background-color: deeppink;
+    border: 1px solid purple;
+}
+.completed{
+    text-decoration: line-through;
+}
+@media (max-width:560px) and (min-width:150px) {
+    *{
+        font-size: 12px;
+    }
+    .container{
+        border: 2px solid deeppink;
+        width: 30%;
+        min-width: 170px;
+        padding: 5px 5px;
+        border-radius: 2px; 
+    }
+    #newtask{
+        border-radius: 2px;
+        padding: 20px 20px;
+    }
+    #newtask input{
+        width: 65%;
+        height: 35px;
+        font-family: 'poppins', sans-serif;
+        border-radius: 2px;
+    }
+    #newtask button{
+        width: 30%;
+        height: 35px;
+        border-radius: 2px;
+    }
+    #tasks{
+        background-color: pink;
+        padding: 20px 20px;
+        margin-top: 20px;
+         width: 76%;
+         border-radius: 2px;
+    }
+    .task{
+        border-bottom: 2px solid rgb(194, 61, 152);
+        height: 30px;
+        padding: 5px 10px;
+        margin-top: 10px;
+        border-radius: 2px;
+        font-size: 12px;
+    }
+    .task span{
+        font-size: 12px;
+        font-weight: 200;
+        border-radius: 2px;
+        color: purple;
+    
+    }
+    .task button{
+        height: 100%;
+        width: 25px;
+        outline: none;
+        cursor: pointer;
+        border-radius: 2px;
+        border: 1px solid deeppink;
+    }
+}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="newtask">
+            <input type="text" name="todo" placeholder="Add your tasks...." class="todo">
+            <button id="push">add</button>
+        </div>
+        <div id="tasks"></div>
+    </div>
+</body>
+
+</html>
+<script>
+    document.querySelector('#push').onclick = function () {
+        if (document.querySelector('#newtask input').value.lenght == 0) {
+            alert("Please enter a task");
+        }
+        else {
+            document.querySelector('#tasks').innerHTML
+                += `
+                <div class="task">
+                    <span id="taskname">
+                        ${document.querySelector
+                    ('#newtask input').value}
+                        </span>
+                        <button class="delete">
+                            <i class="fa fa-trash-o"></i>
+                            </button>
+            </div>
+                `;
+            var current_task = document.querySelectorAll(".delete");
+            for (var i = 0; i < current_task.length; i++) {
+                current_task[i].onclick = function () {
+                    this.parentNode.remove();
+                }
+            }
+            var task = document.querySelectorAll(".tasks");
+            for (var i = 0; i < task.length; i++) {
+                task[i].onclick = function () {
+                    this.classList.toggle('completed');
+                }
+            }
+            document.querySelector("#newtask input").value = "";
+        }
+    }
+</script>
